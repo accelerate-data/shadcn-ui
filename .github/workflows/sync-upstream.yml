@@ -1,4 +1,4 @@
-name: Sync upstream shadcn/ui
+name: Sync upstream shadcn skill
 
 on:
   schedule:
@@ -14,9 +14,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout fork
+      - name: Checkout wrapper repo
         uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
 
       - name: Configure git identity
@@ -24,39 +25,65 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Add upstream remote
-        run: git remote add upstream https://github.com/shadcn-ui/ui.git
-
-      - name: Fetch upstream
-        run: git fetch upstream main
+      - name: Checkout upstream shadcn skill
+        uses: actions/checkout@v4
+        with:
+          repository: shadcn-ui/ui
+          ref: main
+          path: upstream
+          sparse-checkout: |
+            skills/shadcn
+          sparse-checkout-cone-mode: false
 
       - name: Create sync branch
-        run: git checkout -B sync/upstream-shadcn-ui
+        run: git checkout -B sync/upstream-shadcn-skill
 
-      - name: Merge upstream
-        run: git merge upstream/main --no-edit
+      - name: Sync upstream skill
+        run: |
+          rm -rf skills/shadcn
+          mkdir -p skills
+          cp -R upstream/skills/shadcn skills/shadcn
 
       - name: Validate wrapper files
         run: |
           python3 -m json.tool .claude-plugin/plugin.json >/dev/null
           python3 -m json.tool .codex-plugin/plugin.json >/dev/null
           test -f skills/shadcn/SKILL.md
+          test -f skills/shadcn/rules/styling.md
+
+      - name: Detect changes
+        id: changes
+        run: |
+          if git status --porcelain -- skills/shadcn | grep -q .; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit synced skill
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git add skills/shadcn
+          git commit -m "chore: sync upstream shadcn skill"
 
       - name: Push sync branch
-        run: git push origin sync/upstream-shadcn-ui --force-with-lease
+        if: steps.changes.outputs.changed == 'true'
+        run: git push origin sync/upstream-shadcn-skill --force-with-lease
 
       - name: Open sync pull request
+        if: steps.changes.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh pr view sync/upstream-shadcn-ui --json number >/dev/null 2>&1 || \
+          gh pr view sync/upstream-shadcn-skill --json number >/dev/null 2>&1 || \
             gh pr create \
               --base main \
-              --head sync/upstream-shadcn-ui \
-              --title "Sync upstream shadcn-ui/ui" \
+              --head sync/upstream-shadcn-skill \
+              --title "Sync upstream shadcn skill" \
               --body-file - <<'BODY'
-            Automated sync from `shadcn-ui/ui`.
+            Automated sync of `skills/shadcn/` from `shadcn-ui/ui`.
 
-            Review upstream-owned `skills/`, `packages/`, `apps/`, and `templates/`
-            changes before merge.
+            Review upstream-owned skill changes before merge. This wrapper repo
+            intentionally does not sync upstream `apps/`, `packages/`, or
+            `templates/`.
           BODY
