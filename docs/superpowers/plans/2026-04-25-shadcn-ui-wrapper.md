@@ -32,7 +32,7 @@
 **Files:**
 - Create: `.claude-plugin/plugin.json`
 
-- [ ] **Step 1: Create manifest directory**
+- [x] **Step 1: Create manifest directory**
 
 Run:
 
@@ -42,7 +42,7 @@ mkdir -p .claude-plugin
 
 Expected: command exits 0.
 
-- [ ] **Step 2: Add `.claude-plugin/plugin.json`**
+- [x] **Step 2: Add `.claude-plugin/plugin.json`**
 
 Create `.claude-plugin/plugin.json` with:
 
@@ -59,7 +59,7 @@ Create `.claude-plugin/plugin.json` with:
 }
 ```
 
-- [ ] **Step 3: Validate JSON**
+- [x] **Step 3: Validate JSON**
 
 Run:
 
@@ -69,7 +69,7 @@ python3 -m json.tool .claude-plugin/plugin.json
 
 Expected: pretty-printed JSON and exit 0.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 Run:
 
@@ -85,7 +85,7 @@ Expected: commit succeeds.
 **Files:**
 - Create: `.codex-plugin/plugin.json`
 
-- [ ] **Step 1: Create manifest directory**
+- [x] **Step 1: Create manifest directory**
 
 Run:
 
@@ -95,7 +95,7 @@ mkdir -p .codex-plugin
 
 Expected: command exits 0.
 
-- [ ] **Step 2: Add `.codex-plugin/plugin.json`**
+- [x] **Step 2: Add `.codex-plugin/plugin.json`**
 
 Create `.codex-plugin/plugin.json` with:
 
@@ -112,7 +112,7 @@ Create `.codex-plugin/plugin.json` with:
 }
 ```
 
-- [ ] **Step 3: Validate JSON**
+- [x] **Step 3: Validate JSON**
 
 Run:
 
@@ -122,7 +122,7 @@ python3 -m json.tool .codex-plugin/plugin.json
 
 Expected: pretty-printed JSON and exit 0.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 Run:
 
@@ -138,7 +138,7 @@ Expected: commit succeeds.
 **Files:**
 - Create: `AGENTS.md`
 
-- [ ] **Step 1: Create `AGENTS.md`**
+- [x] **Step 1: Create `AGENTS.md`**
 
 Create `AGENTS.md` with:
 
@@ -169,7 +169,7 @@ in Claude and Codex. It should preserve upstream shadcn behavior unless a
 reviewed local divergence is explicitly requested.
 ```
 
-- [ ] **Step 2: Review the rendered guidance**
+- [x] **Step 2: Review the rendered guidance**
 
 Run:
 
@@ -179,7 +179,7 @@ sed -n '1,140p' AGENTS.md
 
 Expected: the upstream-owned content warning is present and clear.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 Run:
 
@@ -195,7 +195,7 @@ Expected: commit succeeds.
 **Files:**
 - Create: `.github/workflows/sync-upstream.yml`
 
-- [ ] **Step 1: Create workflow directory**
+- [x] **Step 1: Create workflow directory**
 
 Run:
 
@@ -205,7 +205,7 @@ mkdir -p .github/workflows
 
 Expected: command exits 0.
 
-- [ ] **Step 2: Add workflow**
+- [x] **Step 2: Add workflow**
 
 Create `.github/workflows/sync-upstream.yml` with:
 
@@ -274,7 +274,7 @@ jobs:
           BODY
 ```
 
-- [ ] **Step 3: Validate workflow text**
+- [x] **Step 3: Validate workflow text**
 
 Run:
 
@@ -299,7 +299,7 @@ PY
 
 Expected: `workflow text checks passed`.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 Run:
 
@@ -317,7 +317,7 @@ Expected: commit succeeds.
 - Read: `.codex-plugin/plugin.json`
 - Read: `skills/shadcn/SKILL.md`
 
-- [ ] **Step 1: Run local validation checks**
+- [x] **Step 1: Run local validation checks**
 
 Run:
 
@@ -329,7 +329,7 @@ test -f skills/shadcn/SKILL.md
 
 Expected: command exits 0.
 
-- [ ] **Step 2: Inspect Claude-specific skill metadata**
+- [x] **Step 2: Inspect Claude-specific skill metadata**
 
 Run:
 
@@ -339,7 +339,7 @@ sed -n '1,40p' skills/shadcn/SKILL.md
 
 Expected: the output shows the current `allowed-tools` and command injection metadata for review.
 
-- [ ] **Step 3: Install from local marketplace source in Claude and Codex**
+- [x] **Step 3: Install from local marketplace source in Claude and Codex**
 
 Run the repository-specific plugin install smoke checks available in the current
 environment. At minimum, verify that Codex can read `.codex-plugin/plugin.json`
@@ -348,7 +348,7 @@ and discover `skills/shadcn/SKILL.md`.
 Expected: Codex installation succeeds or produces a specific incompatibility
 error tied to `allowed-tools` or command injection syntax.
 
-- [ ] **Step 4: Decide whether a Codex compatibility patch is needed**
+- [x] **Step 4: Decide whether a Codex compatibility patch is needed**
 
 If Codex installation succeeds, do not change `skills/shadcn/SKILL.md`.
 
@@ -356,7 +356,7 @@ If Codex installation fails because of Claude-specific metadata, document the
 exact error and add the smallest compatibility patch that preserves Claude
 behavior. Re-run the smoke check after the patch.
 
-- [ ] **Step 5: Commit compatibility patch if needed**
+- [x] **Step 5: Commit compatibility patch if needed**
 
 If Step 4 required a change, commit it:
 
@@ -374,7 +374,7 @@ Expected: commit succeeds only if a compatibility patch was required.
 - Modify: `/Users/hbanerjee/src/plugin-marketplace/.agents/plugins/marketplace.json`
 - Modify if needed: `/Users/hbanerjee/src/plugin-marketplace/.claude-plugin/plugin.json`
 
-- [ ] **Step 1: Update Claude marketplace entry**
+- [x] **Step 1: Update Claude marketplace entry**
 
 In `/Users/hbanerjee/src/plugin-marketplace/.claude-plugin/marketplace.json`, ensure the `shadcn` entry points at the maintained fork:
 
@@ -390,7 +390,7 @@ In `/Users/hbanerjee/src/plugin-marketplace/.claude-plugin/marketplace.json`, en
 }
 ```
 
-- [ ] **Step 2: Update Codex marketplace entry**
+- [x] **Step 2: Update Codex marketplace entry**
 
 In `/Users/hbanerjee/src/plugin-marketplace/.agents/plugins/marketplace.json`, ensure the `shadcn` entry points at the same maintained fork:
 
@@ -409,12 +409,12 @@ In `/Users/hbanerjee/src/plugin-marketplace/.agents/plugins/marketplace.json`, e
 }
 ```
 
-- [ ] **Step 3: Keep marketplace versions aligned**
+- [x] **Step 3: Keep marketplace versions aligned**
 
 If `.claude-plugin/marketplace.json` `metadata.version` changes, update
 `/Users/hbanerjee/src/plugin-marketplace/.claude-plugin/plugin.json` to the same version.
 
-- [ ] **Step 4: Validate marketplace**
+- [x] **Step 4: Validate marketplace**
 
 Run from `/Users/hbanerjee/src/plugin-marketplace`:
 
@@ -433,7 +433,7 @@ OK
 Marketplace `ad-internal-marketplace` is already added
 ```
 
-- [ ] **Step 5: Commit marketplace update**
+- [x] **Step 5: Commit marketplace update**
 
 Run from `/Users/hbanerjee/src/plugin-marketplace`:
 
