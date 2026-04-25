@@ -53,10 +53,10 @@ jobs:
       - name: Detect changes
         id: changes
         run: |
-          if git diff --quiet -- skills/shadcn; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
+          if git status --porcelain -- skills/shadcn | grep -q .; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Commit synced skill
