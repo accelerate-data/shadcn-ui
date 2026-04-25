@@ -1,5 +1,9 @@
 # shadcn/ui Wrapper Implementation Plan
 
+> Archived: this plan described the initial full-fork wrapper setup. It is
+> superseded by `docs/superpowers/plans/2026-04-25-shadcn-ui-lean-wrapper.md`,
+> which documents the current lean `skills/shadcn/` wrapper migration.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Package the forked shadcn skill for Accelerate Data Claude and Codex marketplaces while preserving upstream shadcn source content.

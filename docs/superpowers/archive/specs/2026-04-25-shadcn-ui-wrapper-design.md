@@ -1,5 +1,9 @@
 # shadcn/ui Wrapper Design
 
+> Archived: this design described the initial full-fork wrapper setup. It is
+> superseded by `docs/superpowers/specs/2026-04-25-shadcn-ui-lean-wrapper-design.md`,
+> which documents the current lean `skills/shadcn/` wrapper model.
+
 ## Context
 
 `accelerate-data/shadcn-ui` is a fork of `shadcn-ui/ui`. The upstream repository
