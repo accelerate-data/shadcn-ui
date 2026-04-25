@@ -1,0 +1,10 @@
+{
+  "name": "shadcn",
+  "version": "0.1.0",
+  "description": "shadcn/ui skill packaged for Accelerate Data Claude marketplace installation.",
+  "author": {
+    "name": "Accelerate Data",
+    "url": "https://github.com/accelerate-data"
+  },
+  "repository": "https://github.com/accelerate-data/shadcn-ui"
+}
