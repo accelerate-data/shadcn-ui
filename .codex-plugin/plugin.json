@@ -1,10 +1,18 @@
 {
   "name": "shadcn",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "shadcn/ui skill packaged for Accelerate Data Codex marketplace installation.",
   "author": {
     "name": "Accelerate Data",
     "url": "https://github.com/accelerate-data"
   },
-  "repository": "https://github.com/accelerate-data/shadcn-ui"
+  "repository": "https://github.com/accelerate-data/shadcn-ui",
+  "interface": {
+    "displayName": "shadcn",
+    "shortDescription": "shadcn/ui skill packaged for Accelerate Data Codex marketplace installation.",
+    "developerName": "Accelerate Data",
+    "capabilities": [],
+    "longDescription": "shadcn/ui skill packaged for Accelerate Data Codex marketplace installation.",
+    "category": "Developer Tools"
+  }
 }
